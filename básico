@@ -1,0 +1,586 @@
+
+//FUNCIONES DECLARATIVAS
+
+function saludar(){
+    return "Hola soy Ninety Eight de la Banda Varias Aceras";
+}
+
+function saludar2(){
+    console.log("Hola soy NINETY EIGHT")
+}
+//FUNCIONES CON PARAMETROS
+
+function saludarConparametros(nombre, apellido){
+return `Hola soy ${nombre} ${apellido}`
+
+}
+//console.log(saludarConParametros("Steven", "Tipantuña"));
+
+//FUNCIONES CON PARAMETROS POR DEFECTO
+function saludoConProfesion(nombre="Persona", profesion="Analista de Sistemas"){
+    return `Hola ${nombre} mi Profesion es ${profesion}`
+}
+console.log(saludoConProfesion("Seven", "Development"));
+
+
+// var resultado =saludar()
+// console.log(resultado);
+// console.log(saludar());
+// saludar2
+
+
+/*
+FUNCIONES EXPRESIVAS o FUNCIONES ANONIMAS
+*/
+var saludoConEdad = function(nombre, edad){
+    return `Hola soy ${nombre}y tengo ${edad} año(s)`
+}
+//console.log(saludoConEdad("Steven", 23));
+
+
+/* 
+ARROW FUNCTIONS o FUNCIONES FLECHA
+*/
+var saludoConApellido =(nombre, apellido) => `Hola soy ${nombre} ${apellido}`
+
+var suma=(num1, num2) => num1+num2
+
+//console.log(saludoConApellido("Steven","Tipantuña")); 
+console.log(suma(2, 3));
+
+/*
+FUNCIONES CON PARAMETROS DE OTRAS FUNCIONES
+
+*/
+
+function saludoConFunciones(nombre, cb){
+    return cb(nombre)
+}
+varmiSaludo=saludoConFunciones("Steven", function(nombre){
+    return `Hola soy: ${nombre}`
+})
+// console.log(miSaludo);
+// setTimeout(()=>{
+// console.log("Hola Mundo");
+// },3000);
+
+/*
+CONCAT
+*/
+var numeros=[1, 2, 3, 4, 5];
+var nuevoNumeros = numeros.concat([6, 7, 8, 9, 0]);
+
+// console.log(numeros);
+// console.log(nuevoNumeros);
+
+/*
+JOIN
+*/
+var nombre = ["S","T","E","V","E","N"]
+//console.log(nombre.join("-"));
+
+/*
+SLICE
+*/
+//console.log(nombre.slice(2));
+
+/*
+INDEX OF
+*/
+//console.log(nombre.indexOf("V"))
+
+/*
+LAST INDEX OF
+*/
+//console.log(nombre.lastIndexOf("E"));
+
+/*
+Reverse
+*/
+console.log(nombre.lreverse());
+
+/*
+SORT
+*/
+
+var numerosDesordenados = [3,4,6,7,9,2,13,20]
+//console.log(numerosDesordenados.sort());
+
+/*
+SHIFT
+*/
+//console.log(numerosDesordenados.shift());
+
+/*
+POP
+*/
+//console.log(numerosDesordenados.pop());
+
+/*
+PUSH
+*/
+numerosDesordenados.push(1012)
+console.log(numerosDesordenados);
+
+//CONSULTAR FUNCIONES DE ARREGLO
+
+var pares = [2,4,6,8,10]
+console.log(pares.map((elemento)=> elemento + 1));
+
+
+///DEBER FUNCIONES DE ARREGLO
+
+/*
+1) INCLUDES
+*/
+
+const arr = [1, 2, 3];
+console.log(arr.includes(2)); 
+
+const pets = ['cat', 'dog', 'bat'];
+console.log(pets.includes('cat'));
+console.log(pets.includes('at'));
+
+/*
+2) REDUCE
+*/
+const arr = [1, 2, 3, 4, 5, 6];
+const sum = arr.reduce((total, value)=> total + value, 0);
+console.log(sum); 
+
+/*
+3) SOME
+*/
+ const arr =[1, 2, 3, 4, 5, 6];
+
+ const largeNum = arr.some ( num => num > 4);
+ console.log(LargeNum);
+
+ const smallNum = arr.some(num => num <=0);
+ console.log(smallNum);
+
+ /*
+4) EVERY
+*/
+const arr = [1, 2, 3, 4, 5, 6];
+
+const greaterFour = arr.every(num => num > 4);
+console.log(greaterFour);
+
+const lessTen = arr.every(num => num < 10);
+console.log(lessTen);
+
+/*
+5) FOREACH
+*/
+const arr = [1, 2, 3, 4, 5, 6];
+
+arr.forEach(item=> {
+    console.log(item);
+});
+
+/*
+6) FILTER
+*/
+ const arr = [1, 2, 3, 4, 5, 6];
+
+ const filtered = arr.filter(num => num > 3);
+ console.log(filtered);
+
+
+ console.log(arr);
+//son funciones especiales 
+/* 
+PROMESAS 
+*/
+
+function promesa(){
+    return new Promise((resolve, reject) => {
+
+   
+        if (bandera) {
+            setTimeout(() => {
+                resolve("Peticion Resuelta");
+        }, 3000);
+  
+}else{
+    setTimeout(() => {
+    reject("La Operacion Fallo");
+}, 2000);
+ }
+})
+}
+
+
+
+//       promesa(true)
+//       //se usa then para escribir la respuesta correcta
+//       .then((resultado) => {
+//           console.log(resultado);
+//       })  
+//       // se usa catch para la correccion del error
+// .catch((error) => {
+//     console.log("Error", error);
+// }) 
+    
+var segundaPromesa = () => Promise((resolve, reject) => {
+    if (bandera) {
+        setTimeout(() => {
+            resolve("Peticion Resuelta");
+    }, 3000);
+
+}else{
+setTimeout(() => {
+reject("La Operacion Fallo");
+}, 2000);
+}
+})
+
+segundaPromesa(true)
+.then((respuesta) =>  {
+    console.log(respuesta);
+
+})
+.catch((error) => {
+    console.log(error);
+})
+
+
+promesa(true) // peticion de clientes
+.then((respuesta) => {  //respuesta de lista clientes
+console.log(respuesta);
+return segundaPromesa(true) //Compras del cliente
+})
+.then((respuesta) => {
+    console.log(respuesta); //RESPUESTAS DE LA SEGUNDA PROMESA
+})
+.catch((error) => {
+    console.log(error);
+})
+
+
+// async - await
+
+
+function promesa() {
+    return new Promise((resolve, reject) => {
+
+
+        if (bandera) {
+            setTimeout(() => {
+                resolve("Peticion Resuelta");
+            }, 3000);
+
+        } else {
+            setTimeout(() => {
+                reject("La Operacion Fallo");
+            }, 2000);
+        }
+    })
+}
+
+//SIMULACION FUNCIONES IIF
+
+(async () => {
+try{
+    var respuesta = await promesa(true);
+    console.log(respuesta);
+    
+
+}catch (error){
+    console.log(error);
+}
+ })()
+/*
+Clases
+*/
+
+//COMO SE PROGRAMABA ANTES:
+
+function Rectangulo(base, altura) {
+
+    this.base = base;
+    this.altura = altura;
+}
+Rectangulo.prototype.calcularArea = function(){
+    return this.base * this.altura
+}
+
+var rectangulo = new Rectangulo(6, 3);
+console.log(rectangulo.calcularArea())
+console.log(rectangulo.base)
+
+
+
+//declaracion de clases 
+class Rectangulo2{
+
+}
+
+
+
+
+// Clase Persona
+// implementar getters, setter y realizar una implementacion.
+// implementar metodos estaticos - Clase Punto, Function distancia
+// Construir clase Persona y estudiante, extender Estudiante con Persona>
+// es un modataelo de datos que nos sirve para comunicarnos 
+// en el diseño rest de api y soap
+//  en el modelo cliente servidor
+
+const data = require('./data.json');
+
+//console.log(data);
+
+var modifiedData = data.map((person) => {
+    person.fist_name = person.first_name.toUpperCase()
+return person
+})
+
+var filterResult = modifiedData.filter((person) => person.id === 3)
+//console.log(modifiedData)
+console.log(filterResult)
+
+[
+    {
+        "id": 1,
+        "first_name": "Heriberto",
+        "last_name": "Griffen",
+        "email": "hgriffen0@opera.com"
+    },
+    {
+        "id": 2,
+        "first_name": "Selina",
+        "last_name": "Camin",
+        "email": "scamin1@yale.edu"
+    },
+    {
+        "id": 3,
+        "first_name": "Kial",
+        "last_name": "Coultas",
+        "email": "kcoultas2@accuweather.com"
+    },
+    {
+        "id": 4,
+        "first_name": "Trevar",
+        "last_name": "Brogden",
+        "email": "tbrogden3@wunderground.com"
+    },
+    {
+        "id": 5,
+        "first_name": "Larry",
+        "last_name": "Spatari",
+        "email": "lspatari4@people.com.cn"
+    },
+    {
+        "id": 6,
+        "first_name": "Padraic",
+        "last_name": "Trevorrow",
+        "email": "ptrevorrow5@google.com.au"
+    },
+    {
+        "id": 7,
+        "first_name": "Shirley",
+        "last_name": "Endecott",
+        "email": "sendecott6@ucoz.ru"
+    },
+    {
+        "id": 8,
+        "first_name": "Patrizius",
+        "last_name": "Lomasney",
+        "email": "plomasney7@php.net"
+    },
+    {
+        "id": 9,
+        "first_name": "Zora",
+        "last_name": "Rodnight",
+        "email": "zrodnight8@patch.com"
+    },
+    {
+        "id": 10,
+        "first_name": "Mordecai",
+        "last_name": "Branche",
+        "email": "mbranche9@bloomberg.com"
+    }
+]
+console.log("HOla MUNDO");
+//DEBER: 
+//Consultar las funciones de console.
+
+
+/*
+METODOS
+*/
+
+console.assert()
+/*registra un mensaje y envia una traza de error
+ a la consola si el primer argummento es FALSE. */
+
+
+ console.count()
+ /* 
+ registra el numeri de veces que una linea de codigo
+  ha sido llamada con etiqueta dada.
+ */
+console.debug()
+/* 
+regitra un mensaje con el nivel de "DEBUG".
+*/
+
+console.dir()
+/*
+Muestra un listado interactivo de las propiedades 
+de un objeto JAvaScript especifico.
+Esta lista permite ecaminar el contenido
+de los objetos hijos.
+*/
+
+
+Console.dirxml()
+/* 
+
+Muestra una representacion en forma de arbol de un elemento
+XML/HTML si es posible o la vista del objeto 
+JavaScript si no es Posible.
+*/
+
+
+//valores numericos
+15
+15.5
+
+//Valores de texto - STRING
+'Steven Tipantuña'
+"Ninety Eight"
+
+//Valores de tipo Objeto
+[1, 2, 3]
+["Steven",23, 21.3,{}]
+
+{ nombre: "Stevn", edad: 23, ocupacion: "Analista"}
+
+var nombre = "El Ninety Night ";
+
+
+
+//1er Estado de variable: declaracion
+
+var apellido;
+
+//2do Estado de variable: definicion
+apellido ="Arguello";
+
+var edad = 27;
+
+var altura = 1.67;
+
+var presentacion `hola, mi nombre es:${nombre} y mi edad es:${edad}`;
+//console.log(presentacion);
+var edades=[12,13,14,15];
+
+edades = ["Steven", "Andrea", "Lizbeth"];
+
+var persona = {
+    nombre: "Steven",
+    apellido: "Tipantuña"
+}
+//OBJETOS DENTRO DE OBJETOS
+var data ={
+    personales:{
+        nombre: "Steven",
+        apellido: "Tipantuña"
+    },
+    ocupaciones: [
+        "Analista de Sistemas",
+        "Desarrollo en SP",
+        "Networking"
+    ],
+    pasatiempo: "Rapear"
+}
+//SIEMPRE DEFINIR CONSTANTES CON MAYUSCULAS
+constant PI = 3.1416;
+
+
+
+
+
+//Operador de asignacion
+=
+
+//Operador de comparacion
+
+/*
+==
+===
+*/
+console.log(2 == 2);
+console.log(2 === '2');
+console.log(2 == '2');
+
+/*
+Operadores de ASIGNACION COMPUESTOS
+
++=  /X=X + Y 
+-+ / x= x - y
+
+*/
+
+var numero = 3 
+numero += 2;
+console.log(numero);
+
+// DESESTRUCTURAR OBJETOS
+var persona = { nombre: "Steven", apellido: "Tipantuña",
+ edad: 23,
+viajes: {destino1: "New York", destino2: "Egipto"}};
+
+var { nombre, apellido,  viajes:{ destino1 } } = persona;
+
+console.log(persona);
+console.log(nombre);
+console.log(apellido);
+console.log(destino1);
+var bandera =true;
+ // if(bandera){
+//    console.log("Es Verdadero Homs")
+
+//}
+
+// if(bandera){
+//        console.log("Es Verdadero Homs")
+//     }if(bandera){
+//   }if(bandera){
+
+//   }else {
+//       console.log("Es Falso");
+//   }
+
+switch (key){
+case value:
+    break;
+}
+}
+//WHILE
+while (condition){
+
+}
+
+//FOR
+//  for (let index = 0; index < array.length; index++) {
+//      const element = array[index];
+//     }
+     // FOR IN 
+    //  var persona= {
+    //      nombre: "Steven",
+    //      apellido: "Tipantuña"
+    //  }
+    //  for (const key in persona){
+    //      console.log(persona[key])
+    //  }
+ 
+     //FOR ON
+     var iterable = [1,2,3,4,5]
+     var iterable = [STEVEN]
+     for (const valor of iterable2){
+         console.log(Valor);
+     }
